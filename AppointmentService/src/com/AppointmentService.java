@@ -63,5 +63,19 @@ public class AppointmentService {
 		return output;
 	}
 
+	@DELETE
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteAppointment(String aData) {
+		// Convert the input string to an XML document
+		Document doc = Jsoup.parse(aData, "", Parser.xmlParser());
+		// Read the value from the element <itemID>
+		String appointmentID = doc.select("appointmentID").text();
+
+		String output = appointObj.deleteAppointment(appointmentID);
+
+		return output;
+	}
 
 }

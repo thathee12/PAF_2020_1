@@ -120,4 +120,36 @@ public class Hospital {
 			}
 			return output;
 		}
+		
+		//update operation
+		public String updatehosbranch(String hosID, String hosRegno, String hosname,String hostype, String hosCharge, String Address,String city,String Email) {
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for updating.";
+				}
+				// create a prepared statement
+				String query = "UPDATE hospital SET hosRegno=?,hosname=?,hostype=?,hosCharge=?,Address=?,city=?,Email=? WHERE hosID=?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				// binding values
+				preparedStmt.setString(1, hosRegno);
+				preparedStmt.setString(2, hosname);
+				preparedStmt.setString(3, hostype);
+				preparedStmt.setDouble(4, Double.parseDouble(hosCharge));
+				preparedStmt.setString(5, Address);
+				preparedStmt.setString(6, city);
+				preparedStmt.setString(7, Email);
+				preparedStmt.setInt(8, Integer.parseInt(hosID));
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Updated successfully";
+			} catch (Exception e) {
+				output = "Error while updating the item.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+		
 }

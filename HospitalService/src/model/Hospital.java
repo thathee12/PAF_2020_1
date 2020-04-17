@@ -55,4 +55,5 @@ public class Hospital {
 			}
 			return output;
 		}
+		//end of the insertion class
 }

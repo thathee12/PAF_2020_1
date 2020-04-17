@@ -174,6 +174,38 @@ public String updateAppointment(String ID, String placed_date, String appoint_da
 
 	return output;
 }
+public String deleteAppointment(String ID) {
+	String output = "";
+
+	try {
+		Connection con = connect();
+
+		if (con == null) {
+			return "Error while connecting to the database for deleting.";
+		}
+
+		// create a prepared statement
+		String query = "delete from appointment where appointmentID=?";
+
+		PreparedStatement preparedStmt = con.prepareStatement(query);
+
+		// binding values
+		preparedStmt.setInt(1, Integer.parseInt(ID));
+
+		// execute the statement
+		preparedStmt.execute();
+		con.close();
+
+		output = "Deleted successfully";
+	} 
+	catch (Exception e) 
+	{
+		output = "Error while deleting the item.";
+		System.err.println(e.getMessage());
+	}
+
+	return output;
+}
 
 		
 

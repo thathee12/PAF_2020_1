@@ -24,4 +24,20 @@ public class HospitalService {
 	 {
 	 return hosObj.readhosbranch();
 	 } 
+	
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String inserthosbranch(@FormParam("hosRegno") String hosRegno,
+	 @FormParam("hosname") String hosname,
+	 @FormParam("hostype") String hostype,
+	 @FormParam("hosCharge") String hosCharge,
+	 @FormParam("Address") String Address,
+	 @FormParam("city") String city,
+	 @FormParam("Email") String Email )
+	{
+	 String output = hosObj.inserthosbranch(hosRegno, hosname, hostype, hosCharge,Address,city,Email);
+	return output;
+	}
 }

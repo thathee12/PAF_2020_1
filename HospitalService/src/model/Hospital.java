@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Hospital {
 	
@@ -56,4 +58,66 @@ public class Hospital {
 			return output;
 		}
 		//end of the insertion class
+		//read operation
+		public String readhosbranch() {
+			String output = "";
+
+			try {
+
+				Connection con = connect();
+
+				if (con == null) {
+
+					return "Error while connecting to the database for reading.";
+
+				}
+
+				output = "<table border=\"1\"><tr><th>Hospital Register No</th>" + "<th>Hospital name</th><th>Hospital type</th>"
+						+ "<th>Hospital charge</th>" +"<th>Address</th>" +"<th>City</th>" +"<th>Email</th>" + "<th>Update</th><th>Remove</th></tr>";
+
+				String query = "select * from hospital";
+
+				Statement stmt = con.createStatement();
+
+				ResultSet rs = stmt.executeQuery(query);
+
+				while (rs.next()) {
+
+					String hosID = Integer.toString(rs.getInt("hosID"));
+					String hosRegno = rs.getString("hosRegno");
+					String hosname = rs.getString("hosname");
+					String hostype = rs.getString("hostype");
+					String hosCharge = Double.toString(rs.getDouble("hosCharge"));
+					String Address = rs.getString("Address");
+					String city = rs.getString("city");
+					String Email = rs.getString("Email");
+					
+
+					// Add into the html table
+					output += "<tr><td>" + hosRegno + "</td>";
+					output += "<td>" + hosname + "</td>";
+					output += "<td>" + hostype + "</td>";
+					output += "<td>" + hosCharge + "</td>";
+					output += "<td>" + Address + "</td>";
+					output += "<td>" + city + "</td>";
+					output += "<td>" + Email + "</td>";
+
+					// buttons
+					output += "<td><input name=\"btnUpdate\" " + " type=\"button\" value=\"Update\"></td>"
+							+ "<td><form method=\"post\" action=\"items.jsp\">" + "<input name=\"btnRemove\" "
+							+ " type=\"submit\" value=\"Remove\">" + "<input name=\"itemID\" type=\"hidden\" " + " value=\""
+							+ hosID + "\">" + "</form></td></tr>";
+				}
+				con.close();
+
+				// complete html table
+				output += "</table>";
+			}
+
+			catch (Exception e) {
+				output = "Error while reading the items.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
 }

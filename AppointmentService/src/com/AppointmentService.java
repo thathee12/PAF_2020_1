@@ -40,4 +40,26 @@ Appointment appointObj = new Appointment ();
 		String output = appointObj.insertAppointment(pADate , aDate, aCause, aPatient, aDoctor, aDay);
 		return output;
 	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateAppointment(String AppointData) {
+		// Convert the input string to a JSON object
+		JsonObject	aObject = new JsonParser().parse(AppointData).getAsJsonObject();
+
+		// Read the values from the JSON object
+		String appointmentID = aObject.get("appointmentID").getAsString();
+		String pADate = aObject.get("pADate").getAsString();
+		String aDate = aObject.get("aDate").getAsString();
+		String aCause = aObject.get("aCause").getAsString();
+		String aPatient = aObject.get("aPatient").getAsString();
+		String aDoctor = aObject.get("aDoctor").getAsString();
+		String aDay = aObject.get("aDay").getAsString();
+
+		String output = appointObj.updateAppointment(appointmentID, pADate,aDate,aCause, aPatient, aDoctor, aDay);
+
+		return output;
+	}
 }

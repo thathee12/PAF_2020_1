@@ -133,6 +133,48 @@ public String readAppointment() {
 
 	return output;
 }
+
+public String updateAppointment(String ID, String placed_date, String appoint_date, String cause, String patientID, String doctorID, String day) {
+	String output = "";
+
+	try {
+		Connection con = connect();
+
+		if (con == null) {
+			return "Error while connecting to the database for updating";
+		}
+
+		// create a prepared statement
+		String query = "UPDATE appointment SET pADate=?,aDate=?,aCause=?,aPatient=?,aDoctor=?,aDay=?" + "WHERE appointmentID=?";
+
+		PreparedStatement preparedStmt = con.prepareStatement(query);
+
+		// binding values
+	
+		preparedStmt.setString(1,placed_date); 
+		
+		//preparedStmt.setDate(2, java.sql.Date(date1.getTime()); 
+		
+		preparedStmt.setString(2,appoint_date); 
+		preparedStmt.setString(3, cause);
+		preparedStmt.setInt(4, Integer.parseInt(patientID));
+		preparedStmt.setInt(5, Integer.parseInt(doctorID));
+		preparedStmt.setString(6, day);
+		preparedStmt.setInt(7, Integer.parseInt(ID));
+		
+		// execute the statement
+		preparedStmt.execute();
+		con.close();
+
+		output = "Updated successfully";
+	} catch (Exception e) {
+		output = "Error while updating the appointment.";
+		System.err.println(e.getMessage());
+	}
+
+	return output;
+}
+
 		
 
 		//commit

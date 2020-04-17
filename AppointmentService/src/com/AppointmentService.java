@@ -30,4 +30,14 @@ Appointment appointObj = new Appointment ();
 	public String readAppointment() {
 		return appointObj.readAppointment();
 	}
+	
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertAppointment(@FormParam("pADate") String pADate, @FormParam("aDate") String aDate,
+			@FormParam("aCause") String  aCause, @FormParam("aPatient") String aPatient, @FormParam("aDoctor") String aDoctor,@FormParam("aDay") String aDay) {
+		String output = appointObj.insertAppointment(pADate , aDate, aCause, aPatient, aDoctor, aDay);
+		return output;
+	}
 }

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 
 public class Hospital {
 	
-	//connection class created
+	//connection class created 
 		private Connection connect()
 		 {
 		 Connection con = null;
@@ -54,5 +54,5 @@ public class Hospital {
 				System.err.println(e.getMessage());
 			}
 			return output;
-		}
+		}//end of insertion
 }

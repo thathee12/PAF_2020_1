@@ -40,4 +40,25 @@ public class HospitalService {
 	 String output = hosObj.inserthosbranch(hosRegno, hosname, hostype, hosCharge,Address,city,Email);
 	return output;
 	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updatehosbranch(String hosData)
+	{
+	//Convert the input string to a JSON object
+	 JsonObject itemObject = new JsonParser().parse(hosData).getAsJsonObject();
+	//Read the values from the JSON object
+	 String hosID = itemObject.get("hosID").getAsString();
+	 String hosRegno = itemObject.get("hosRegno").getAsString();
+	 String hosname = itemObject.get("hosname").getAsString();
+	 String hostype = itemObject.get("hostype").getAsString();
+	 String hosCharge = itemObject.get("hosCharge").getAsString();
+	 String Address = itemObject.get("Address").getAsString();
+	 String city = itemObject.get("city").getAsString();
+	 String Email = itemObject.get("Email").getAsString();
+	 String output = hosObj.updatehosbranch(hosID, hosRegno, hosname, hostype, hosCharge, Address, city, Email);
+	return output;
+	}
 }

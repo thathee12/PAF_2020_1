@@ -61,4 +61,19 @@ public class HospitalService {
 	 String output = hosObj.updatehosbranch(hosID, hosRegno, hosname, hostype, hosCharge, Address, city, Email);
 	return output;
 	}
+	
+	@DELETE
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deletehosbranch(String hosData)
+	{
+	//Convert the input string to an XML document
+	 Document doc = Jsoup.parse(hosData, "", Parser.xmlParser());
+
+	//Read the value from the element <itemID>
+	 String hosID = doc.select("hosID").text();
+	 String output = hosObj.deletehosbranch(hosID);
+	return output;
+	}
 }

@@ -21,8 +21,13 @@ import org.jsoup.nodes.Document;
 @Path("/Appointment")
 public class AppointmentService {
 	
-	Appointment appointObj = new Appointment ();
+Appointment appointObj = new Appointment ();
 	
 	
-
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
+	public String readAppointment() {
+		return appointObj.readAppointment();
+	}
 }

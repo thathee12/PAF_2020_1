@@ -93,7 +93,7 @@ public class Hospital {
 					String Email = rs.getString("Email");
 					
 
-					// Add into the html table
+					//   Add into the html table
 					output += "<tr><td>" + hosRegno + "</td>";
 					output += "<td>" + hosname + "</td>";
 					output += "<td>" + hostype + "</td>";
@@ -131,6 +131,7 @@ public class Hospital {
 				// create a prepared statement
 				String query = "UPDATE hospital SET hosRegno=?,hosname=?,hostype=?,hosCharge=?,Address=?,city=?,Email=? WHERE hosID=?";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
+				
 				// binding values
 				preparedStmt.setString(1, hosRegno);
 				preparedStmt.setString(2, hosname);
@@ -146,6 +147,30 @@ public class Hospital {
 				output = "Updated successfully";
 			} catch (Exception e) {
 				output = "Error while updating the item.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+		
+		//delete operation
+		public String deletehosbranch(String hosID) {
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for deleting.";
+				}
+				// create a prepared statement
+				String query = "delete from hospital where hosID=?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+				// binding values
+				preparedStmt.setInt(1, Integer.parseInt(hosID));
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Deleted successfully";
+			} catch (Exception e) {
+				output = "Error while deleting the item.";
 				System.err.println(e.getMessage());
 			}
 			return output;

@@ -76,6 +76,63 @@ public String insertAppointment( String placed_date , String appoint_date, Strin
 
 			return output;
 		}
+
+public String readAppointment() {
+	String output = "";
+
+	try {
+		Connection con = connect();
+
+		if (con == null) {
+			return "Error while connecting to the database for reading!";
+		}
+
+		// Prepare the html table to be displayed
+		output = "<table border=\"1\"><tr><th>Appointment ID</th><th>Placed Date</th>"
+				+ "<th>Appointment Date</th><th>Cause</th><th>Patient ID</th><th>Doctor ID</th><th>Day</th>" + "<th>Update</th><th>Remove</th></tr>";
+
+		String query = "select * from appointment";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+
+		// iterate through the rows in the result set
+		while (rs.next()) {
+			String appointmentID = Integer.toString(rs.getInt("appointmentID"));
+			String pADate = rs.getString("pADate");
+			String aDate = rs.getString("aDate");
+			String aCause = rs.getString("aCause");
+			String aPatient = Integer.toString(rs.getInt("aPatient"));
+			String aDoctor = Integer.toString(rs.getInt("aDoctor"));
+			String aDay = rs.getString("aDay");
+
+			// Add into the html table
+			output += "<tr><td>" + appointmentID + "</td>";
+			output += "<td>" + pADate + "</td>";
+			output += "<td>" + aDate + "</td>";
+			output += "<td>" + aCause + "</td>";
+			output += "<td>" + aPatient + "</td>";
+			output += "<td>" + aDoctor + "</td>";
+			output += "<td>" + aDay + "</td>";
+
+
+			// buttons
+			output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"
+					+ "<td><form method=\"post\" action=\"appointment.jsp\">"
+					+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
+					+ "<input name=\"appointmentID\" type=\"hidden\" value=\"" + appointmentID + "\">" + "</form></td></tr>";
+		}
+
+		con.close();
+
+		// Complete the html table
+		output += "</table>";
+	} catch (Exception e) {
+		output = "Error while reading the appointments!";
+		System.err.println(e.getMessage());
+	}
+
+	return output;
+}
 		
 
 		//commit

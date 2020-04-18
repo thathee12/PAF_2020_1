@@ -57,7 +57,7 @@ public class Payment {
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
-			// Prepare the html table to be displayed
+			//html table
 			output = "<table border=\"1\"><tr><th>Payment Id</th><th>Name on card</th><th>Card type</th><th>bank</th><th>Total amount</th><th>Status</th></tr>";
 			String query = "select * from payments";
 			Statement stmt = con.createStatement();

@@ -33,6 +33,14 @@ import java.sql.Time;
 @Path("/Schedules")
 public class ScheduleService {
 	
+	Schedule schedule = new Schedule();
 	
+	// read schedules
+	@GET
+	@Path("/ScheduleDetails")
+	@Produces(MediaType.TEXT_HTML)
+	public String readAllTypes() {
+		return schedule.readSchedule();
+	}
 
 }

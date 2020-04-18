@@ -71,7 +71,7 @@ Appointment appointObj = new Appointment ();
 	public String deleteAppointment(String aData) {
 		// Convert the input string to an XML document
 		Document doc = Jsoup.parse(aData, "", Parser.xmlParser());
-		// Read the value from the element <itemID>
+		// Read the value from the element <appointmentID>
 		String appointmentID = doc.select("appointmentID").text();
 
 		String output = appointObj.deleteAppointment(appointmentID);

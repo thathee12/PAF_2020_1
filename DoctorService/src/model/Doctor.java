@@ -51,7 +51,7 @@ public class Doctor {
 						+ "<th>Gender</th>"
 						+ "<th>DocCharge</th>"
 						+ "<th>Hospital</th>"
-						+ "<th>Hospital</th></tr>";
+						+ "<th>Password</th></tr>";
 				
 				String query = "SELECT * FROM doctor";
 				

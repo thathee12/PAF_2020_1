@@ -58,7 +58,6 @@ public class Doctor {
 				Statement statement = con.createStatement();
 				ResultSet resultSet = statement.executeQuery(query);
 				
-				
 				//iterate through the rows in the result set			
 				while (resultSet.next()) {
 					int docId =    resultSet.getInt("docId");

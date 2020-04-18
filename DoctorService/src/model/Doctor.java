@@ -136,4 +136,38 @@ public class Doctor {
 			}
 			
 			
+			//------------------------- Delete a doctor from the table -------------------------
+			
+			public String RemoveDoctor(int docId) {
+				String output = "";
+				try {
+
+					Connection con = connect();
+					if (con == null) {
+						return "Error while connecting to the database for deleting.";
+					}
+
+					// create a prepared statement
+					String query = "DELETE FROM doctor WHERE docId=?";
+					PreparedStatement preparedStatement = con.prepareStatement(query);
+
+					// binding values
+					preparedStatement.setInt(1, docId);
+
+					// execute the statement
+					preparedStatement.execute();
+					con.close();
+					output = "Deleted successfully";
+
+				} catch (Exception e) {
+
+					output = "Error while deleting the Doctor";
+					System.err.println(e.getMessage());
+				}
+
+				return output;
+			}
+
+			
+			
 }

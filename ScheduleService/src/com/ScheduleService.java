@@ -39,7 +39,7 @@ public class ScheduleService {
 	@GET
 	@Path("/ScheduleDetails")
 	@Produces(MediaType.TEXT_HTML)
-	public String readAllTypes() {
+	public String readSchedule() {
 		return schedule.readSchedule();
 	}
 

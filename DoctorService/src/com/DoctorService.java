@@ -70,4 +70,20 @@ Doctor doctor = new Doctor();
 
 				}
 				
+				
+				// delete Doctor
+				@DELETE
+				@Path("/DoctorDetails")
+				@Consumes(MediaType.APPLICATION_JSON)
+				@Produces(MediaType.TEXT_PLAIN)
+				public String deleteAppointmentSchedule(String DoctorData) {
+					// Convert the input string to a JSON object
+					JsonObject jsonObject = new JsonParser().parse(DoctorData).getAsJsonObject();
+
+					// Read the value from the element <ID>
+					int DocId = jsonObject.get("docId").getAsInt();
+					String output = doctor.RemoveDoctor(DocId);
+					return output;
+				}
+				
 }

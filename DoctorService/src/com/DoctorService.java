@@ -42,4 +42,32 @@ Doctor doctor = new Doctor();
 		public String readAllTypes() {
 			return doctor.readDoctor();
 		}
+		
+		// add Doctor
+				@POST 
+				@Path("/DoctorDetails")
+				@Consumes(MediaType.APPLICATION_JSON)
+				@Produces(MediaType.TEXT_PLAIN)
+				public String enterType(String DoctorData) {
+					// Convert the input string to a JSON object
+					JsonObject jsonObject = new JsonParser().parse(DoctorData).getAsJsonObject();
+
+					// Read the values from the JSON object
+					int docId = jsonObject.get("docId").getAsInt();
+					String fname = jsonObject.get("docFname").getAsString();
+					String lname = jsonObject.get("docLname").getAsString();
+					String specialization = jsonObject.get("specialization").getAsString();
+					int phone =jsonObject.get("contact").getAsInt();
+					String email = jsonObject.get("email").getAsString();
+					String address = jsonObject.get("address").getAsString();
+					String gender = jsonObject.get("gender").getAsString();
+					float charge =jsonObject.get("docCharge").getAsFloat();
+					int hospital = jsonObject.get("hospital").getAsInt();
+					String password = jsonObject.get("password").getAsString();
+					
+					String output = doctor.addDoctor(docId, fname, lname, specialization, phone, email, address, gender, charge, hospital, password);
+					return output;
+
+				}
+				
 }

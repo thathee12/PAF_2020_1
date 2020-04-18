@@ -43,5 +43,7 @@ public class ScheduleService {
 	public String readAllTypes() {
 		return schedule.readSchedule();
 	}
+	
+	
 
 }

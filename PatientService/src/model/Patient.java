@@ -135,5 +135,28 @@ public class Patient {
 		}
 		return output;
 	}
+		public String deletePatientDetails(String patientID) {
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for deleting.";
+				}
+	// create a prepared statement
+				String query = "delete from patients where patientID=?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+	// binding values
+				preparedStmt.setString(1, patientID);
+	// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Deleted successfully";
+			} catch (Exception e) {
+				output = "Error while deleting the patient detail.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+	
 
 }

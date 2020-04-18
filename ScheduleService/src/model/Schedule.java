@@ -16,7 +16,7 @@ public class Schedule {
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hospitaldb", "root", "");	
+			con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf_ca", "root", "");	
 			System.out.print("Successfully connected");
 
 		} catch (Exception e) {

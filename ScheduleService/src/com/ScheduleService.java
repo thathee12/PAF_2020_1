@@ -63,5 +63,23 @@ public class ScheduleService {
 			return output;
 
 		}
+			
+			// delete Schedule
+			@DELETE
+			@Path("/ScheduleDetails")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			public String deleteAppointmentSchedule(String ScheduleData) {
+				// Convert the input string to a JSON object
+				JsonObject jsonObject = new JsonParser().parse(ScheduleData).getAsJsonObject();
+
+				// Read the value from the element <ID>
+				int docId = jsonObject.get("docId").getAsInt();
+				String workingDay = jsonObject.get("workingDay").getAsString();
+				
+				String output = schedule.removeSchedule(docId, workingDay);
+				return output;
+			}
+				
 
 }

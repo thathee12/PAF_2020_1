@@ -80,6 +80,4 @@ public class ScheduleService {
 				String output = schedule.removeSchedule(docId, workingDay);
 				return output;
 			}
-				
-
 }

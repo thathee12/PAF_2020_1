@@ -49,4 +49,44 @@ public class Payment {
 		}
 		return output;
 	}
+
+	public String readPayments() {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+			// Prepare the html table to be displayed
+			output = "<table border=\"1\"><tr><th>Payment Id</th><th>Name on card</th><th>Card type</th><th>bank</th><th>Total amount</th><th>Status</th></tr>";
+			String query = "select * from payments";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			// iterate through the rows in the result set
+			while (rs.next()) {
+				String p_id = Integer.toString(rs.getInt("p_id"));
+				String NameOnCard = rs.getString("NameOnCard");
+				String cardType = rs.getString("cardType");
+				String bank = rs.getString("bank");
+				String totAmount = Double.toString(rs.getDouble("totAmount"));
+				String Status = rs.getString("Status");
+
+				// Add into the html table
+				output += "<tr><td>" + p_id + "</td>";
+				output += "<td>" + NameOnCard + "</td>";
+				output += "<td>" + cardType + "</td>";
+				output += "<td>" + bank + "</td>";
+				output += "<td>" + totAmount + "</td>";
+				output += "<td>" + Status + "</td>";
+
+			}
+			con.close();
+			// Complete the html table
+			output += "</table>";
+		} catch (Exception e) {
+			output = "Error while reading the items.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 }

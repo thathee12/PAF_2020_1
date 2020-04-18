@@ -185,7 +185,6 @@ public class Doctor {
 					PreparedStatement preparedStatement = con.prepareStatement(query);
 
 					// binding values
-					preparedStatement.setInt(0, docId);
 					preparedStatement.setString(1, docFname);
 					preparedStatement.setString(2, docLname);
 					preparedStatement.setString(3, specialization);
@@ -197,7 +196,6 @@ public class Doctor {
 					preparedStatement.setInt(9, hospital);
 					preparedStatement.setString(10, password);
 					preparedStatement.setInt(11, docId);
-					preparedStatement.setInt(0, docId);
 					
 					// execute the statement
 					preparedStatement.execute();

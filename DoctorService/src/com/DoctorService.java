@@ -94,7 +94,6 @@ Doctor doctor = new Doctor();
 				@Consumes(MediaType.APPLICATION_JSON)
 				@Produces(MediaType.TEXT_PLAIN)
 				public String updateAppType(String DoctorData) {
-
 					// Convert the input string to a JSON object
 					JsonObject jsonObject = new JsonParser().parse(DoctorData).getAsJsonObject();
 

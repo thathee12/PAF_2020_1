@@ -140,4 +140,40 @@ public class Schedule {
 
 			return output;
 		}
+		
+		//------------------------- Updating schedule details in the table -------------------------
+		
+		public String updateSchedule(int docId, String workingDay, int max_num_of_patients, String workingDayN) {
+
+			String output = "";
+
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for updating.";
+				}
+				// create a prepared statement
+				String query = "UPDATE schedule SET workingDay =?, max_num_of_patients =? WHERE docId =? AND workingDay =?";
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+
+				// binding values
+				preparedStatement.setString(1, workingDay);
+				preparedStatement.setInt(2, max_num_of_patients);
+				preparedStatement.setInt(3, docId);
+				preparedStatement.setString(4, workingDayN);
+				
+				// execute the statement
+				preparedStatement.execute();
+				con.close();
+				output = "Updated successfully";
+			} 
+			
+			catch (Exception e) {
+				output = "Error while updating the Schedule";
+				System.err.println(e.getMessage());
+			}
+			
+			return output;
+		}
+
 }

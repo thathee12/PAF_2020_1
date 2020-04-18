@@ -33,7 +33,6 @@ import java.sql.Time;
 @Path("/Schedules")
 public class ScheduleService {
 	
-	
 	Schedule schedule = new Schedule();
 	
 	// read schedules

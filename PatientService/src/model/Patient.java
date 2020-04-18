@@ -103,4 +103,37 @@ public class Patient {
 		return output;
 	}
 
+	public String updatePatientDetails(String Pno, String patientID, String firstname, String lastName, String gender,
+			String phone, String address, String age, String bloodGroup, String nextOfKin) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+// create a prepared statement
+			String query = "UPDATE patients SET `patientID`=?,`firstname`=?, `lastName`=?, `gender`=?, `phone`=?, `address`=?, `age`=?, `bloodGroup`=?, `nextOfKin`=?  WHERE `Pno`=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+// binding values
+			preparedStmt.setString(1, patientID);
+			preparedStmt.setString(2, firstname);
+			preparedStmt.setString(3, lastName);
+			preparedStmt.setString(4, gender);
+			preparedStmt.setString(5, phone);
+			preparedStmt.setString(6, address);
+			preparedStmt.setString(7, age);
+			preparedStmt.setString(8, bloodGroup);
+			preparedStmt.setString(9, nextOfKin);
+			preparedStmt.setInt(10, Integer.parseInt(Pno));
+// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating a patient detail.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+
 }

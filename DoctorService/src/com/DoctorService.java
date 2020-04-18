@@ -84,6 +84,7 @@ Doctor doctor = new Doctor();
 					// Read the value from the element <ID>
 					int DocId = jsonObject.get("docId").getAsInt();
 					String output = doctor.RemoveDoctor(DocId);
+					
 					return output;
 				}
 				

@@ -89,4 +89,36 @@ public class Payment {
 		}
 		return output;
 	}
+
+	public String updatePayment(String ID, String name, String type, String bank, String tot, String status)
+
+	{
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+			// create a prepared statement
+			String query = "UPDATE payments SET NameOnCard=?,cardType=?,bank=?,totAmount=?,Status=? WHERE p_id=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			preparedStmt.setString(1, name);
+			preparedStmt.setString(2, type);
+			preparedStmt.setString(3, bank);
+			preparedStmt.setDouble(4, Double.parseDouble(tot));
+			preparedStmt.setString(5, status);
+
+			preparedStmt.setInt(6, Integer.parseInt(ID));
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating the payment.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+
 }

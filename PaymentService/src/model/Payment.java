@@ -143,4 +143,29 @@ public class Payment {
 		}
 		return output;
 	}
+
+	public String updateStat(String ID)
+
+	{
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for updating.";
+			}
+			// create a prepared statement
+			String query = "UPDATE payments SET Status='REFUND'  WHERE p_id=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+
+			preparedStmt.setInt(1, Integer.parseInt(ID));
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+			output = "Updated successfully";
+		} catch (Exception e) {
+			output = "Error while updating the payment.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 }

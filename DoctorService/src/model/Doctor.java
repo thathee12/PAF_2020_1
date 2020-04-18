@@ -54,11 +54,10 @@ public class Doctor {
 						+ "<th>Password</th></tr>";
 				
 				String query = "SELECT * FROM doctor";
-				
 				Statement statement = con.createStatement();
 				ResultSet resultSet = statement.executeQuery(query);
 				
-				//iterate through the rows in the result set			
+				//iterate through the rows			
 				while (resultSet.next()) {
 					int docId =    resultSet.getInt("docId");
 					String docFname =  resultSet.getString("docFname");

@@ -71,4 +71,40 @@ public class Schedule {
 
 			return output;
 		}
+		
+		//------------------------- Insert a schedule into the table -------------------------
+		
+		public String addSchedule(int docId, String workingDay, int max_num_of_patients) {
+
+			String output = "";
+			try {
+
+				Connection con = connect();
+
+				if (con == null) {
+					return "Error while connecting to the database";
+				}
+
+				// create a prepared statement
+				String query = "INSERT INTO schedule (docId, workingDay, max_num_of_patients) VALUES (?, ?, ?)";
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+
+				// binding values
+				preparedStatement.setInt(1, docId);
+				preparedStatement.setString(2, workingDay);
+				preparedStatement.setInt(3, max_num_of_patients);
+			
+
+				// execute the statement
+				preparedStatement .execute();
+				con.close();
+				output = "Inserted successfully";
+
+			} catch (Exception e) {
+				output = "Error while inserting a Schedule";
+				System.err.println(e.getMessage());
+			}
+
+			return output;
+		}
 }

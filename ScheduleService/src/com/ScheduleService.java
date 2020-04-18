@@ -80,4 +80,24 @@ public class ScheduleService {
 				String output = schedule.removeSchedule(docId, workingDay);
 				return output;
 			}
+			
+			// update Schedule 
+			@PUT
+			@Path("/ScheduleDetails")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			public String updateAppType(String ScheduleData) {
+
+				// Convert the input string to a JSON object
+				JsonObject jsonObject = new JsonParser().parse(ScheduleData).getAsJsonObject();
+
+				// Read the values from the JSON object
+				int docId = jsonObject.get("docId").getAsInt();
+				String workingDay = jsonObject.get("workingDay").getAsString();
+				int max_num_of_patients = jsonObject.get("max_num_of_patients").getAsInt();
+				String workingDayN = jsonObject.get("workingDay").getAsString();
+		
+				String output = schedule.updateSchedule(docId, workingDay, max_num_of_patients, workingDayN);
+				return output;
+			}
 }

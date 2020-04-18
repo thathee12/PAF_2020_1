@@ -125,7 +125,9 @@ public class Doctor {
 					con.close();
 					output = "Inserted successfully";
 
-				} catch (Exception e) {
+				} 
+				
+				catch (Exception e) {
 					output = "Error while inserting a Doctor";
 					System.err.println(e.getMessage());
 				}

@@ -107,4 +107,37 @@ public class Schedule {
 
 			return output;
 		}
+		
+		//------------------------- Delete a schedule from the table -------------------------
+		
+		public String removeSchedule(int docId, String workingDay) {
+			String output = "";
+			try {
+
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for deleting.";
+				}
+
+				// create a prepared statement
+				String query = "DELETE FROM schedule WHERE docId=? AND workingDay =?";
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+
+				// binding values
+				preparedStatement.setInt(1, docId);
+				preparedStatement.setString(2, workingDay);
+
+				// execute the statement
+				preparedStatement.execute();
+				con.close();
+				output = "Deleted successfully";
+
+			} catch (Exception e) {
+
+				output = "Error while deleting the Schedule";
+				System.err.println(e.getMessage());
+			}
+
+			return output;
+		}
 }

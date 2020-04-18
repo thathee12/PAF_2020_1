@@ -59,7 +59,7 @@ public String insertAppointment( String placed_date , String appoint_date, Strin
 				preparedStmt.setString(3,appoint_date); 
 				preparedStmt.setString(4, cause);
 				preparedStmt.setInt(5, Integer.parseInt(patientID));
-				preparedStmt.setInt(6, Integer.parseInt(doctorID));
+				preparedStmt.setString(6,doctorID);
 				preparedStmt.setString(7, day);
 				
 				
@@ -102,7 +102,7 @@ public String readAppointment() {
 			String aDate = rs.getString("aDate");
 			String aCause = rs.getString("aCause");
 			String aPatient = Integer.toString(rs.getInt("aPatient"));
-			String aDoctor = Integer.toString(rs.getInt("aDoctor"));
+			String aDoctor = rs.getString("aDoctor");
 			String aDay = rs.getString("aDay");
 
 			// Add into the html table
@@ -158,7 +158,7 @@ public String updateAppointment(String ID, String placed_date, String appoint_da
 		preparedStmt.setString(2,appoint_date); 
 		preparedStmt.setString(3, cause);
 		preparedStmt.setInt(4, Integer.parseInt(patientID));
-		preparedStmt.setInt(5, Integer.parseInt(doctorID));
+		preparedStmt.setString(5, doctorID);
 		preparedStmt.setString(6, day);
 		preparedStmt.setInt(7, Integer.parseInt(ID));
 		

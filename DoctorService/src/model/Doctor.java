@@ -88,4 +88,48 @@ public class Doctor {
 
 			return output;
 		}
+		
+		//------------------------- Inserting doctors to the table -------------------------
+		
+			public String addDoctor(int docId, String docFname, String docLname, String specialization, int contact, String email, String address, String gender, float docCharge, int hospital, String password) {
+
+				String output = "";
+				try {
+
+					Connection con = connect();
+
+					if (con == null) {
+						return "Error while connecting to the database";
+					}
+
+					// create a prepared statement
+					String query = " INSERT INTO doctor (docId, docFname, docLname, specialization, contact, email, address, gender, docCharge, hospital, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					PreparedStatement preparedStatement = con.prepareStatement(query);
+
+					// binding values
+					preparedStatement.setInt(1, docId);
+					preparedStatement.setString(2, docFname);
+					preparedStatement.setString(3, docLname);
+					preparedStatement.setString(4, specialization);
+					preparedStatement.setInt(5, contact);
+					preparedStatement.setString(6, email);
+					preparedStatement.setString(7, address);
+					preparedStatement.setString(8, gender);
+					preparedStatement.setFloat(9, docCharge);
+					preparedStatement.setInt(10, hospital);
+					preparedStatement.setString(11, password);
+					
+
+					// execute the statement
+					preparedStatement.execute();
+					con.close();
+					output = "Inserted successfully";
+
+				} catch (Exception e) {
+					output = "Error while inserting a Doctor";
+					System.err.println(e.getMessage());
+				}
+
+				return output;
+			}
 }

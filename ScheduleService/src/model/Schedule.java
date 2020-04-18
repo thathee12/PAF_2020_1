@@ -28,4 +28,47 @@ public class Schedule {
 
 		return con;
 	}
+	
+	
+	//------------------------- Read schedules from the table -------------------------
+	
+		public String readSchedule() {
+
+			String output = "";
+			try {
+				Connection con = connect();
+				if (con == null) {
+					return "Error while connecting to the database for reading.";
+				}
+				// Prepare the html table to be displayed
+				output = "<table border=\"1\"><tr><th>DoctorId</th>"
+						+ "<th>WorkingDay</th>" 
+						+ "<th>PatientCount</th></tr>"; 
+								
+				String query = "SELECT * FROM schedule";
+				
+				Statement statement = con.createStatement();
+				ResultSet resultSet = statement.executeQuery(query);
+
+				
+				while (resultSet.next()) {
+					int docId = resultSet.getInt("docId");
+					String workingDay =  resultSet.getString("workingDay");
+					int max_num_of_patients =  resultSet.getInt("max_num_of_patients");
+									
+					output += "<tr><td>" + docId + "</td><td>" + workingDay + "</td><td>" + max_num_of_patients + "</td></tr>";
+				
+				}
+
+				con.close();
+				
+				output += "</table>";
+
+			} catch (Exception e) {
+				output = "Error while reading the Schedules";
+				System.err.println(e.getMessage());
+			}
+
+			return output;
+		}
 }

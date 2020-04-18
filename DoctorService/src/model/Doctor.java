@@ -49,7 +49,7 @@ public class Doctor {
 						+ "<th>Email</th>"
 						+ "<th>Address</th>"
 						+ "<th>Gender</th>"
-						+ "<th>DocCharge</th>"
+						+ "<th>Hospital</th>"
 						+ "<th>Hospital</th>"
 						+ "<th>Hospital</th></tr>";
 				

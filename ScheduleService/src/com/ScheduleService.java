@@ -95,9 +95,9 @@ public class ScheduleService {
 				int docId = jsonObject.get("docId").getAsInt();
 				String workingDay = jsonObject.get("workingDay").getAsString();
 				int max_num_of_patients = jsonObject.get("max_num_of_patients").getAsInt();
-				String workingDayN = jsonObject.get("workingDay").getAsString();
+				String workingDayNew = jsonObject.get("workingDay").getAsString();
 		
-				String output = schedule.updateSchedule(docId, workingDay, max_num_of_patients, workingDayN);
+				String output = schedule.updateSchedule(docId, workingDay, max_num_of_patients, workingDayNew);
 				return output;
 			}
 }

@@ -29,9 +29,8 @@ public class Doctor {
 		return con;
 	}
 	
-	//------------------------- Read details from table -------------------------
-	
-		public String readDoctor() {
+	//------------------------- Read doctor details from table -------------------------
+			public String readDoctor() {
 
 			String output = "";
 			try {

@@ -43,7 +43,8 @@ Doctor doctor = new Doctor();
 			return doctor.readDoctor();
 		}
 		
-		// add Doctor
+		// add Doctors
+		
 				@POST 
 				@Path("/DoctorDetails")
 				@Consumes(MediaType.APPLICATION_JSON)

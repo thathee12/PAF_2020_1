@@ -71,7 +71,7 @@ Doctor doctor = new Doctor();
 				}
 				
 				
-				// delete Doctor
+				// delete Doctors
 				@DELETE
 				@Path("/DoctorDetails")
 				@Consumes(MediaType.APPLICATION_JSON)

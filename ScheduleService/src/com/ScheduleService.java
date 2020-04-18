@@ -50,6 +50,7 @@ public class ScheduleService {
 			@Consumes(MediaType.APPLICATION_JSON)
 			@Produces(MediaType.TEXT_PLAIN)
 			public String enterType(String ScheduleData) {
+				
 			// Convert the input string to a JSON object
 			JsonObject jsonObject = new JsonParser().parse(ScheduleData).getAsJsonObject();
 

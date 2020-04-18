@@ -44,7 +44,6 @@ Doctor doctor = new Doctor();
 		}
 		
 		// add Doctor
-		
 				@POST 
 				@Path("/DoctorDetails")
 				@Consumes(MediaType.APPLICATION_JSON)

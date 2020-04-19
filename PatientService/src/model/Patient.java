@@ -143,10 +143,11 @@ public class Patient {
 					return "Error while connecting to the database for deleting.";
 				}
 	// create a prepared statement
-				String query = "delete from patients where patientID=?";
+				String query = "delete from patients where Pno=?";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 	// binding values
-				preparedStmt.setString(1, patientID);
+				preparedStmt.setInt(1, Integer.parseInt(ID));
+				
 	// execute the statement
 				preparedStmt.execute();
 				con.close();

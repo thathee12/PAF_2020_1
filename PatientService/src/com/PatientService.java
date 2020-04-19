@@ -69,7 +69,7 @@ public class PatientService {
 		// Convert the input string to an XML document
 		Document doc = Jsoup.parse(patientData, "", Parser.xmlParser());
 		// Read the value from the element <patientID>
-		String patientID = doc.select("patientID").text();
+		String patientID = doc.select("Pno").text();
 		String output = patientObj.deletePatientDetails(patientID);
 		return output;
 	}
